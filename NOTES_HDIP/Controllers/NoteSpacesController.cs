@@ -49,7 +49,7 @@ namespace NOTES_HDIP.Controllers
         // GET: NoteSpaces/Create
         public IActionResult Create()
         {
-            //ViewData["UserID"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace NOTES_HDIP.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["UserID"] = new SelectList(_context.ApplicationUsers, "Id", "Id", noteSpace.UserID);
+            
             return View(noteSpace);
         }
 
@@ -86,7 +86,7 @@ namespace NOTES_HDIP.Controllers
             {
                 return NotFound();
             }
-            //ViewData["UserID"] = new SelectList(_context.ApplicationUsers, "Id", "Id", noteSpace.UserID);
+            
             return View(noteSpace);
         }
 
@@ -123,7 +123,7 @@ namespace NOTES_HDIP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // ViewData["UserID"] = new SelectList(_context.ApplicationUsers, "Id", "Id", noteSpace.UserID);
+            
             return View(noteSpace);
         }
 
