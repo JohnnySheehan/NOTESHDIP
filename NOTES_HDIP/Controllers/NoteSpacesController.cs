@@ -169,5 +169,26 @@ namespace NOTES_HDIP.Controllers
         {
             return _context.NoteSpaces.Any(e => e.Id == id);
         }
+
+
+        //search
+        [HttpGet]
+        public async Task<IActionResult> Index(string id)
+        {
+            if (_context.NoteSpaces == null)
+            {
+                return Problem("No Notespace found");
+            }
+
+            var spaces = from p in _context.NoteSpaces
+                         select p;
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                spaces = spaces.Where(i => i.Name!.Contains(id));
+            }
+
+            return View(await spaces.ToListAsync());
+        }
     }
 }

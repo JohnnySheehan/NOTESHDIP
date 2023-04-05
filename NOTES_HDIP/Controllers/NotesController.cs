@@ -59,8 +59,11 @@ namespace NOTES_HDIP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,NoteField,NoteSpaceID")] Note note)
         {
+            //var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+
             if (ModelState.IsValid)
             {
+                //note.NoteSpaces.User.Id = curretlyLoggedInUserId;
                 _context.Add(note);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
