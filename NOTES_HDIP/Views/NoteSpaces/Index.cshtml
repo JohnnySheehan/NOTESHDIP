@@ -11,6 +11,16 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Enter NoteSpace Name..." value="@ViewData["GetNoteSpaces"]" name="id" />
+        <input type="submit" value="search" class="btn btn-primary" />
+        
+    </p>
+    <a asp-action="Index">Return All</a>
+</form>
+
 <table class="table">
     <thead>
         <tr>

@@ -28,6 +28,30 @@ namespace NOTES_HDIP.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        //search
+        [HttpGet]
+        public async Task<IActionResult> Index(string id)
+        {
+            var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+
+            ViewData["GetNoteSpaces"] = id;
+
+            if (_context.NoteSpaces == null)
+            {
+                return Problem("No Notespace found");
+            }
+
+            var spaces = from p in _context.NoteSpaces.Where(n => n.UserID == curretlyLoggedInUserId)
+            select p;
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                spaces = spaces.Where(i => i.Name!.Contains(id));
+            }
+
+            return View(await spaces.AsNoTracking().ToListAsync());
+        }
+
         // GET: NoteSpaces/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -170,25 +194,5 @@ namespace NOTES_HDIP.Controllers
             return _context.NoteSpaces.Any(e => e.Id == id);
         }
 
-
-        //search
-        [HttpGet]
-        public async Task<IActionResult> Index(string id)
-        {
-            if (_context.NoteSpaces == null)
-            {
-                return Problem("No Notespace found");
-            }
-
-            var spaces = from p in _context.NoteSpaces
-                         select p;
-
-            if (!String.IsNullOrEmpty(id))
-            {
-                spaces = spaces.Where(i => i.Name!.Contains(id));
-            }
-
-            return View(await spaces.ToListAsync());
-        }
     }
 }
