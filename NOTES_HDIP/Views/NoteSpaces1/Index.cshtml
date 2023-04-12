@@ -4,23 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-
-
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
-<form method="get" asp-action="Index">
-    <p>
-        <input type="search" placeholder="Enter NoteSpace Name..." value="@ViewData["GetNoteSpaces"]" name="id" />
-        <input type="submit" value="search" class="btn btn-primary" />
-        
-    </p>
-    <a asp-action="Index">Return All</a>
-</form>
-
 <table class="table">
     <thead>
         <tr>
@@ -51,9 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.User.Id)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Priority)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

@@ -48,7 +48,12 @@ namespace NOTES_HDIP.Controllers
         // GET: Notes/Create
         public IActionResult Create()
         {
-            ViewData["NoteSpaceID"] = new SelectList(_context.NoteSpaces, "Id", "Name");
+            var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+            var notespaces = from p in _context.NoteSpaces.Where(n => n.UserID == curretlyLoggedInUserId)
+                         select p;
+
+            ViewData["NoteSpaceID"] =
+                new SelectList(_context.NoteSpaces.Where(n => n.UserID == curretlyLoggedInUserId), "Id", "Name");
             return View();
         }
 
@@ -59,17 +64,23 @@ namespace NOTES_HDIP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,NoteField,NoteSpaceID")] Note note)
         {
-            //var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+            
+
+
+            var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+            var NoteSpaces = _context.Notes.Where(i => i.NoteSpaces.User.Id == curretlyLoggedInUserId);
 
             if (ModelState.IsValid)
             {
-                //note.NoteSpaces.User.Id = curretlyLoggedInUserId;
+                
                 _context.Add(note);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index(note.NoteSpaceID)));
             }
             ViewData["NoteSpaceID"] = new SelectList(_context.NoteSpaces, "Id", "Id", note.NoteSpaceID);
             return View(note);
+
+            
         }
 
         // GET: Notes/Edit/5

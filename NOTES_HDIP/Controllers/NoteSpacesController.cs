@@ -28,7 +28,7 @@ namespace NOTES_HDIP.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        //search
+        //search function
         [HttpGet]
         public async Task<IActionResult> Index(string id)
         {
@@ -82,7 +82,7 @@ namespace NOTES_HDIP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] NoteSpace noteSpace)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Priority")] NoteSpace noteSpace)
         {
             var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
 
@@ -119,7 +119,7 @@ namespace NOTES_HDIP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] NoteSpace noteSpace)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Priority")] NoteSpace noteSpace)
         {
             if (id != noteSpace.Id)
             {

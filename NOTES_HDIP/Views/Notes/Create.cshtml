@@ -36,6 +36,8 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index" asp-route-id="@Model?.NoteSpaceID">View Notes</a>
+    <a href="##" onClick="history.go(-2); return false;"> Return after create</a>
 </div>
 
 @section Scripts {
