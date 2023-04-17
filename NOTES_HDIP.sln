@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NOTES_HDIP", "NOTES_HDIP\NOTES_HDIP.csproj", "{D93ACDE9-25DC-42CF-B8EA-99901D1DF1CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NOTES_HDIP", "NOTES_HDIP\NOTES_HDIP.csproj", "{D93ACDE9-25DC-42CF-B8EA-99901D1DF1CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNotesProject", "TestNotesProject\TestNotesProject.csproj", "{EABB96B1-1A02-4C69-A76B-9396E48BD66C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D93ACDE9-25DC-42CF-B8EA-99901D1DF1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D93ACDE9-25DC-42CF-B8EA-99901D1DF1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D93ACDE9-25DC-42CF-B8EA-99901D1DF1CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EABB96B1-1A02-4C69-A76B-9396E48BD66C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EABB96B1-1A02-4C69-A76B-9396E48BD66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EABB96B1-1A02-4C69-A76B-9396E48BD66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EABB96B1-1A02-4C69-A76B-9396E48BD66C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
