@@ -119,7 +119,7 @@ namespace NOTES_HDIP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Priority")] NoteSpace noteSpace)
+        public async Task<IActionResult> Edit(int id, int v, [Bind("Id,Name,Description,Priority")] NoteSpace noteSpace)
         {
             if (id != noteSpace.Id)
             {

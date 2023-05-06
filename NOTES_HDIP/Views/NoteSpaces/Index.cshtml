@@ -31,9 +31,6 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
             <th></th>
@@ -48,9 +45,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
+            
                 <td>
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
