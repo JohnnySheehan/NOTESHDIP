@@ -1,8 +1,12 @@
-﻿namespace NOTES_HDIP.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
+
+namespace NOTES_HDIP.Models
 {
     public class CommunityPost
     {
-        public int PostId { get; set; }
+        [Key]
+        public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
         public DateTime TimeCreated { get; set; } = DateTime.Now;

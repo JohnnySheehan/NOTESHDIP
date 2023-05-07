@@ -25,7 +25,13 @@ namespace NOTES_HDIP.Data
         {
             builder.Entity<ApplicationUser>()
                 .HasMany(p => p.NoteSpace).WithOne(u => u.User).IsRequired();
-          
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(p => p.CommunityPost).WithOne(u => u.User).IsRequired();
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(p => p.CommunityComment).WithOne(u => u.User).IsRequired();
+
             base.OnModelCreating(builder);
         }
     }
