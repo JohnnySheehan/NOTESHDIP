@@ -107,7 +107,7 @@ namespace NOTES_HDIP.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityPost.UserID);
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityPost.UserID);
             return View(communityPost);
         }
 
@@ -116,9 +116,13 @@ namespace NOTES_HDIP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,TimeCreated,UserID")] CommunityPost communityPost)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,TimeCreated")] CommunityPost communityPost)
         {
+            var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
             
+
+            var time = communityPost.TimeCreated;
+            //var OriginalTime = _context.CommunityPosts.FirstOrDefault
             if (id != communityPost.Id)
             {
                 return NotFound();
@@ -128,6 +132,9 @@ namespace NOTES_HDIP.Controllers
             {
                 try
                 {
+                    communityPost.UserID = curretlyLoggedInUserId;
+                    communityPost.TimeCreated = time;
+                    
                     _context.Update(communityPost);
                     await _context.SaveChangesAsync();
                 }
@@ -144,7 +151,7 @@ namespace NOTES_HDIP.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityPost.UserID);
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityPost.UserID);
             return View(communityPost);
         }
 
