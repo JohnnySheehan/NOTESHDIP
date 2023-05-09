@@ -50,18 +50,7 @@ namespace NOTES_HDIP.Controllers
             return View(communityPost);
         }
 
-        public async Task<IActionResult> Details1(int? id)
-        {
-            if (id == null || _context.CommunityPosts == null)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Message = "Post Details!";
-            ViewBag.CommunityPost = await _context.CommunityPosts.FirstOrDefaultAsync(m => m.Id == id);
-            ViewBag.CommunityComment = _context.CommunityComments.Where(p => p.PostId == id).FirstOrDefault();
-            return View();
-        }
+        
 
         // GET: CommunityPosts/Create
         public IActionResult Create()

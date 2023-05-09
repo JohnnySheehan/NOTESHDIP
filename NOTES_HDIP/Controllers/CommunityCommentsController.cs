@@ -22,7 +22,7 @@ namespace NOTES_HDIP.Controllers
         // GET: CommunityComments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CommunityComments.Include(c => c.User);
+            var applicationDbContext = _context.CommunityComments;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace NOTES_HDIP.Controllers
             }
 
             var communityComment = await _context.CommunityComments
-                .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (communityComment == null)
             {
@@ -48,7 +47,10 @@ namespace NOTES_HDIP.Controllers
         // GET: CommunityComments/Create
         public IActionResult Create()
         {
-            ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
+            //var posts = from p in _context.CommunityPosts.Where(n => n.Id == id)
+                             //select p;
+            //ViewData["UserID"] = new SelectList(_context.CommunityPosts.Where(a => a.Id == id), "Id", "Title");
+
             return View();
         }
 
@@ -57,15 +59,19 @@ namespace NOTES_HDIP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Created,PostId,UserID")] CommunityComment communityComment)
+        public async Task<IActionResult> Create([Bind("Id,Content,Created,PostId")] CommunityComment communityComment)
         {
+            var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+            
             if (ModelState.IsValid)
             {
+                communityComment.UserID = curretlyLoggedInUserId;
+                
                 _context.Add(communityComment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
             return View(communityComment);
         }
 
