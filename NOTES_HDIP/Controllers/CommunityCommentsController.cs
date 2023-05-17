@@ -47,11 +47,12 @@ namespace NOTES_HDIP.Controllers
         // GET: CommunityComments/Create
         public IActionResult Create()
         {
-            //var posts = from p in _context.CommunityPosts.Where(n => n.Id == id)
-                             //select p;
-            //ViewData["UserID"] = new SelectList(_context.CommunityPosts.Where(a => a.Id == id), "Id", "Title");
 
+            ViewData["PostId"] = new SelectList(_context.CommunityPosts, "Id", "Title");
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
             return View();
+
+           
         }
 
         // POST: CommunityComments/Create
