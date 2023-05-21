@@ -40,9 +40,11 @@ namespace TestNotesProject
             database.SaveChanges();
             return database;
         }
+
+
         //testing in memory data is not null
         [Fact]
-        public void NoteSpace_AssertNotNull_ViaIDQuery()
+        public void NoteSpace_AssertNotNull()
         {
             //Arrange - data/object creation
             
@@ -56,6 +58,8 @@ namespace TestNotesProject
             Assert.NotNull(ns_ID);
 
         }
+
+
         //testing index method returns object
         [Fact]
         public void NoteSpace_Index()
@@ -71,6 +75,34 @@ namespace TestNotesProject
             //Asert
             Assert.NotNull(index);
         }
+
+        //testing details method returns object
+        [Fact]
+        public void NoteSpace_Details()
+        {
+
+            // Arrange
+            ApplicationDbContext database = Create_database();
+            NoteSpacesController _notespacecontroller = new NoteSpacesController(database);
+            NoteSpace testNoteSpace = new NoteSpace();
+            {
+                testNoteSpace.Id = 200;
+                testNoteSpace.Name = "Test 1";
+                testNoteSpace.Priority = Priority.Low;
+                testNoteSpace.Notes = null;
+                testNoteSpace.Description = "Test for creation 100";
+                testNoteSpace.User = new ApplicationUser { Id = "asbsbs2", Email = "john2@email.com" };
+                testNoteSpace.UserID = "asbsbs2";
+            };
+
+            // Act
+            var details = _notespacecontroller.Details(200);
+
+            //Asert
+            Assert.NotNull(details);
+        }
+
+
         //test create Notespace
         [Fact]
         public void Notespace_Create()
@@ -98,6 +130,7 @@ namespace TestNotesProject
             Assert.NotNull(create);
             Assert.IsType<NoteSpace>(testNoteSpace);
         }
+
 
         //Delete - Needs to be async otherwise will throw threading error
         [Fact]

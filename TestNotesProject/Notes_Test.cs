@@ -54,9 +54,9 @@ namespace TestNotesProject
             return database;
         }
 
-        //testing in memory data is not null
+        //testing in memory data is not null / details method
         [Fact]
-        public void Note_AssertNotNull_ViaIDQuery()
+        public void Note_Details()
         {
             //Arrange - data/object creation
 
@@ -68,28 +68,30 @@ namespace TestNotesProject
 
             //Assert - assetion for test
             Assert.NotNull(Note_ID);
-            //Assert.IsType<Note>(Note_ID);
+            
         }
 
-        //testing in memory data is not null
+        //testing Note Create Method
         [Fact]
-        public void Note_AssertIsType()
+        public async Task Note_Create()
         {
             //Arrange - data/object creation
 
             ApplicationDbContext database = Create_database();
             NotesController _notescontroller = new NotesController(database);
 
-            Note testNote = new Note();
+            Note testNote = new Note()
             {
-                testNote.Id = 2;
-                testNote.Name = "Test Note";
-                testNote.NoteField = "Testing the note";
-                testNote.NoteSpaceID = 1;
+                Id = 2,
+                Name = "Test Note",
+                NoteField = "Testing the note",
+                NoteSpaceID = 1,
             };
 
             //Act - simulate interaction/call/change
-            var create = _notescontroller.Create(testNote);
+            database.Notes.Add(testNote);
+            database.SaveChanges();
+            
 
             //Assert - assetion for test
 
@@ -110,5 +112,23 @@ namespace TestNotesProject
             //assert
             Assert.IsType<NotFoundResult>(deletion);
         }
+
+        //testing Index returns object
+        [Fact]
+        public void Notes_Index()
+        {
+
+            //arrange
+            ApplicationDbContext database = Create_database();
+            NotesController _notescontroller = new NotesController(database);
+
+            //act .. id = 1 for Notespace
+            var index = _notescontroller.Index(1);
+
+            //assert
+            Assert.NotNull(index);
+        }
+
+
     }
 }
