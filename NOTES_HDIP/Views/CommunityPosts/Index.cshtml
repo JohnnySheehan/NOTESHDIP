@@ -1,14 +1,28 @@
 ﻿@model IEnumerable<NOTES_HDIP.Models.CommunityPost>
 
+
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Community Posts</h1>
 
+
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Search Posts" value="@ViewData["GetCommunityPosts"]" name="id" />
+        <input type="submit" value="search" class="btn btn-primary" />
+
+    </p>
+    <a asp-action="Index">Return All</a>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -56,3 +70,5 @@
 }
     </tbody>
 </table>
+
+

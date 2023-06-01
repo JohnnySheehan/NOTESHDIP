@@ -76,6 +76,7 @@ namespace NOTES_HDIP.Controllers
                 _context.Add(note);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index(note.NoteSpaceID)));
+                return RedirectToAction("Index", "Notes", new { id = note.NoteSpaceID });
             }
             ViewData["NoteSpaceID"] = new SelectList(_context.NoteSpaces, "Id", "Id", note.NoteSpaceID);
             return View(note);
@@ -130,7 +131,8 @@ namespace NOTES_HDIP.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Notes", new { id = note.NoteSpaceID });
             }
             ViewData["NoteSpaceID"] = new SelectList(_context.NoteSpaces, "Id", "Id", note.NoteSpaceID);
             return View(note);
@@ -171,7 +173,8 @@ namespace NOTES_HDIP.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Notes", new { id = note.NoteSpaceID });
         }
 
         private bool NoteExists(int id)

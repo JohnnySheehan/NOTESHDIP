@@ -6,7 +6,7 @@
 
 
 
-<h1>Your Note Spaces</h1>
+<h1>Your Notespaces</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,7 +14,7 @@
 
 <form method="get" asp-action="Index">
     <p>
-        <input type="search" placeholder="Enter NoteSpace Name..." value="@ViewData["GetNoteSpaces"]" name="id" />
+        <input type="search" placeholder="Search Notespaces" value="@ViewData["GetNoteSpaces"]" name="id" />
         <input type="submit" value="search" class="btn btn-primary" />
         
     </p>
@@ -51,7 +51,7 @@
                 </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">View Notespace</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

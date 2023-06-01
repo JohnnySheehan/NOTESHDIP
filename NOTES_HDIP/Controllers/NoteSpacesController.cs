@@ -160,7 +160,7 @@ namespace NOTES_HDIP.Controllers
             }
 
             var noteSpace = await _context.NoteSpaces
-                .Include(n => n.User)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (noteSpace == null)
             {

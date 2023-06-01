@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NOTES_HDIP.Data;
 using NOTES_HDIP.Models;
+using X.PagedList.Mvc;
+using X.PagedList.Mvc.Core;
+using X.PagedList.Web;
+
 
 namespace NOTES_HDIP.Controllers
 {
@@ -28,8 +32,35 @@ namespace NOTES_HDIP.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: CommunityPosts/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+        //search function
+        [HttpGet]
+        public async Task<IActionResult> Index(string id)
+        {
+
+            ViewData["GetCommunityPosts"] = id;
+
+            if (_context.CommunityPosts == null)
+            {
+                return Problem("No Post of that description found");
+            }
+
+            var posts = from p in _context.CommunityPosts select p;
+            
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                posts = posts.Where(p => p.Title!.Contains(id) || p.Content.Contains(id));
+            }
+
+            return View(await posts.AsNoTracking().ToListAsync());
+
+        }
+
+        
+
+            // GET: CommunityPosts/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             
 

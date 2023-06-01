@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NOTES_HDIP.Data;
+using NOTES_HDIP.Data.Migrations;
 using NOTES_HDIP.Models;
 
 namespace NOTES_HDIP.Controllers
@@ -20,9 +21,10 @@ namespace NOTES_HDIP.Controllers
         }
 
         // GET: CommunityComments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var applicationDbContext = _context.CommunityComments;
+            
+            var applicationDbContext = _context.CommunityComments.Where(p => p.PostId== id);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -70,7 +72,8 @@ namespace NOTES_HDIP.Controllers
                 
                 _context.Add(communityComment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "CommunityComments", new { id = communityComment.PostId });
             }
             //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
             return View(communityComment);
@@ -89,7 +92,7 @@ namespace NOTES_HDIP.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
             return View(communityComment);
         }
 
@@ -98,8 +101,11 @@ namespace NOTES_HDIP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Created,PostId,UserID")] CommunityComment communityComment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Created,PostId")] CommunityComment communityComment)
         {
+            var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+
+            var time = communityComment.Created;
             if (id != communityComment.Id)
             {
                 return NotFound();
@@ -109,6 +115,9 @@ namespace NOTES_HDIP.Controllers
             {
                 try
                 {
+                    communityComment.UserID = curretlyLoggedInUserId;
+                    communityComment.Created = time;
+
                     _context.Update(communityComment);
                     await _context.SaveChangesAsync();
                 }
@@ -123,9 +132,11 @@ namespace NOTES_HDIP.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "CommunityComments", new { id = communityComment.PostId });
+                
             }
-            ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
             return View(communityComment);
         }
 
@@ -164,7 +175,8 @@ namespace NOTES_HDIP.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "CommunityComments", new { id = communityComment.PostId });
         }
 
         private bool CommunityCommentExists(int id)
