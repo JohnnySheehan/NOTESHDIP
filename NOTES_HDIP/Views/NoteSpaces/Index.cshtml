@@ -6,19 +6,19 @@
 
 
 
-<h1>Your Notespaces</h1>
+<h1><b>Your Notespaces</b></h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Create Notespace </a>
 </p>
 
 <form method="get" asp-action="Index">
     <p>
         <input type="search" placeholder="Search Notespaces" value="@ViewData["GetNoteSpaces"]" name="id" />
-        <input type="submit" value="search" class="btn btn-primary" />
+        <input type="submit" value="Search" class="btn btn-info" />
         
     </p>
-    <a asp-action="Index">Return All</a>
+    <a class="btn btn-outline-info" asp-action="Index">Return All</a>
 </form>
 
 <table class="table">
@@ -50,9 +50,9 @@
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">View Notespace</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View Notespace</a> |
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

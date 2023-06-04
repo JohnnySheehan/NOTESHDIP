@@ -28,6 +28,27 @@ namespace NOTES_HDIP.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        //search
+        [HttpGet]
+        public async Task<IActionResult> Index(int id, string word)
+        {
+            var comments1 = _context.CommunityComments.Where(c => c.PostId == id);
+
+            ViewData["GetComments"] = word;
+
+            if (comments1 == null)
+            {
+                return Problem("No Notespace found");
+            }
+
+            if (!String.IsNullOrEmpty(word))
+            {
+                comments1 = comments1.Where(i => i.Content!.Contains(word));
+            }
+
+            return View(await comments1.AsNoTracking().ToListAsync());
+        }
+
         // GET: CommunityComments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -92,7 +113,9 @@ namespace NOTES_HDIP.Controllers
             {
                 return NotFound();
             }
-            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
+            ViewData["PostId"] = new SelectList(_context.CommunityPosts, "Id", "Title");
+            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
+            //return View();
             return View(communityComment);
         }
 
@@ -136,7 +159,7 @@ namespace NOTES_HDIP.Controllers
                 return RedirectToAction("Index", "CommunityComments", new { id = communityComment.PostId });
                 
             }
-            //ViewData["UserID"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", communityComment.UserID);
+           // ViewData["PostId"] = new SelectList(_context.CommunityPosts, "Id", "Title");
             return View(communityComment);
         }
 
@@ -149,7 +172,7 @@ namespace NOTES_HDIP.Controllers
             }
 
             var communityComment = await _context.CommunityComments
-                .Include(c => c.User)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (communityComment == null)
             {

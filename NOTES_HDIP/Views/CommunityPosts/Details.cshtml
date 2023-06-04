@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1><b>Post: @Model.Title</b></h1>
 
 <div>
-    <h4>CommunityPost</h4>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -37,12 +37,14 @@
     </dl>
 </div>
 <div>
+    <a class="btn btn-success" asp-area="" asp-controller="CommunityComments" asp-action="Index" asp-route-id="@Model?.Id">View Comments for @Model.Title</a>
+    <br />
+    <br />
     @if (Model.UserID == User.Claims.ToList()[0].Value)
     {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model?.Id">Edit Post</a> 
     }
     
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-info" asp-action="Index">Back to List</a>
 
-    <a class="nav-link text-dark" asp-area="" asp-controller="CommunityComments" asp-action="Index" asp-route-id="@Model?.Id">View Comments</a>
 </div>

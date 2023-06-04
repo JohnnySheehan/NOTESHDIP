@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1><b>Please fill in the parameters below to create a Community Post</b></h1>
 
-<h4>CommunityPost</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,11 +23,11 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="TimeCreated" class="control-label"></label>
+                <label asp-for="TimeCreated" class="control-label"> Time</label>
                 <input asp-for="TimeCreated" class="form-control" />
                 <span asp-validation-for="TimeCreated" class="text-danger"></span>
             </div>
-            
+            <br />
             <!--
             <div class="form-group">
                 <label asp-for="UserID" class="control-label"></label>
@@ -36,14 +35,14 @@
             </div>
             -->
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-info" asp-action="Index">Back to Community Posts</a>
 </div>
 
 @section Scripts {

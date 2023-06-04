@@ -4,9 +4,15 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div>
+    <a class="btn btn-outline-danger" href="##" onClick="history.go(-1); return false;">Go Back</a>
+</div>
 
-<h4>CommunityComment</h4>
+<br />
+
+<h1><b>Fill in parameters below to create a Comment</b></h1>
+
+<h4><b>New Comment</b></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,15 +40,12 @@
                 <select asp-for="UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
             </div>
             -->
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -6,21 +6,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Community Posts</h1>
+<h1><b>Community Section</b></h1>
+<h4><b>Read Posts and Create Them!!!</b></h4>
 
 
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Create New Post</a>
 </p>
 
 <form method="get" asp-action="Index">
     <p>
         <input type="search" placeholder="Search Posts" value="@ViewData["GetCommunityPosts"]" name="id" />
-        <input type="submit" value="search" class="btn btn-primary" />
+        <input type="submit" value="search" class="btn btn-info" />
 
     </p>
-    <a asp-action="Index">Return All</a>
+    <a class="btn btn-outline-info" asp-action="Index">Return All</a>
 </form>
 
 <table class="table">
@@ -32,9 +33,6 @@
             <th>
                 @Html.DisplayNameFor(model => model) Time Created
             </th>
-            
-            
-            
             <th></th>
         </tr>
     </thead>
@@ -50,7 +48,7 @@
             </td>
             
             <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Read Post</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Read Post</a>
 
                    
                 
@@ -59,11 +57,11 @@
 
                         <tag> | </tag>
 
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
 
                         <tag> | </tag>
 
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
             </td>
         </tr>

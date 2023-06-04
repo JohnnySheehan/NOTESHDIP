@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
-      }
+    /*
       "NOTES_HDIP": {
         "commandName": "Project",
         "dotnetRunMessages": true,
@@ -26,7 +26,7 @@
         "environmentVariables": {
           "ASPNETCORE_ENVIRONMENT": "Production"
         }
-      },
+      },*/
 
       "IIS Express": {
         "commandName": "IISExpress",

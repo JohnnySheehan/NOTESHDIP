@@ -4,48 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-<form asp-controller="" asp-action="Index">
-    <p>
-        Title: <input type="text" name="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
-<h1>Your Notes</h1>
+<h1><b>Your Notes</b></h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Create Note</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Search Notes" value="@ViewData["GetNotes"]" name="word" />
+        <input type="submit" value="Search" class="btn btn-info" />
+
+    </p>
+    <a class="btn btn-outline-info" asp-action="Index">Return All</a>
+    
+</form>
+
+<hr />
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th><b>
                 @Html.DisplayNameFor(model => model.Name)
+                </b>
             </th>
             <th>
+                <b>
                 @Html.DisplayNameFor(model => model.NoteField)
+                </b>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoteSpaces)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td><b>
                 @Html.DisplayFor(modelItem => item.Name)
+                </b>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NoteField)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.NoteSpaces.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View Note</a> |
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

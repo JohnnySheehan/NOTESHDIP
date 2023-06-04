@@ -28,7 +28,7 @@ namespace NOTES_HDIP.Controllers
         // GET: CommunityPosts
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CommunityPosts;
+            var applicationDbContext = _context.CommunityPosts.OrderByDescending(p => p.TimeCreated);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -98,9 +98,11 @@ namespace NOTES_HDIP.Controllers
         public async Task<IActionResult> Create([Bind("Id,Title,Content,TimeCreated")] CommunityPost communityPost)
         {
             var curretlyLoggedInUserId = HttpContext.User.Claims.ToList()[0].Value;
+           
             if (ModelState.IsValid)
             {
                 communityPost.UserID = curretlyLoggedInUserId;
+                
                 _context.Add(communityPost);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

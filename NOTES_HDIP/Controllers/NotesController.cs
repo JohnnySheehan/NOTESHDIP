@@ -26,6 +26,29 @@ namespace NOTES_HDIP.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+
+        //search
+        [HttpGet]
+        public async Task<IActionResult> Index(int id, string word)
+        {
+            var notes1 = _context.Notes.Where(n => n.NoteSpaceID == id);
+
+            ViewData["GetNoteSpaces"] = word;
+
+            if (notes1 == null)
+            {
+                return Problem("No Notespace found");
+            }
+
+            if (!String.IsNullOrEmpty(word))
+            {
+                notes1 = notes1.Where(i => i.Name!.Contains(word));
+            }
+
+            return View(await notes1.AsNoTracking().ToListAsync());
+        }
+
+
         // GET: Notes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

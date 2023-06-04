@@ -4,9 +4,15 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div>
+    <a class="btn btn-outline-danger" href="##" onClick="history.go(-1); return false;">Go Back</a>
+</div>
 
-<h4>Note</h4>
+<br />
+
+<h1><b>Fill in parameters below to create a Note</b></h1>
+
+<h4><b>New Note</b></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="NoteField" class="control-label"></label>
-                <input asp-for="NoteField" class="form-control" />
+                <input asp-for="NoteField" class="form-control form-control-lg" />
                 <span asp-validation-for="NoteField" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,17 +34,12 @@
             </div>
             <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index" asp-route-id="@Model?.NoteSpaceID">View Notes</a>
-    <a href="##" onClick="history.go(-2); return false;"> Return after create</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

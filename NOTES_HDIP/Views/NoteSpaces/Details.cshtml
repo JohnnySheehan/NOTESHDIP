@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1><b>Details for @Model.Name</b></h1>
 
 <div>
-    <h4>NoteSpace</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -31,8 +30,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-success" asp-area="" asp-controller="Notes" asp-action="Index" asp-route-id="@Model?.Id">View Notes for Notespace: @Model.Name</a>
+    <br />
+    <br />
 
-    <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index" asp-route-id="@Model?.Id">View Notes</a>
+    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a class="btn btn-info" asp-action="Index">Back to Notespaces</a>   
+    <br />
 </div>
